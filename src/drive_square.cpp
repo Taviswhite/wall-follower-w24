@@ -10,22 +10,22 @@ int main(int argc, const char *argv[])
     // Initialize the robot.
     mbot_bridge::MBot robot;
 
-    /**
-     * TODO: (P1.1) Write code to make the robot drive in a square. Then,
-     * modify your code so that the robot drives in a square 3 times.
-     *
-     * HINT: A function to send velocity commands to the robot is provided. To
-     * use it, use the following code:
-     *
-     *      robot.drive(vx, vy, wz);
-     *
-     * Replace vx, vy, and wz with the velocity in the x direction (vx), y
-     * direction (vy), and the angular velocity (wz). You can also use this code:
-     *
-     *      sleepFor(secs);
-     *
-     * to sleep for "secs" seconds (replace with desired number of seconds).
-     */
+     // Drive in a square 3 times
+    for (int lap = 0; lap < 3; lap++) {
+        std::cout << "Starting square " << lap + 1 << std::endl;
+
+        for (int side = 0; side < 4; side++) {
+            // Drive forward
+            robot.drive(0.2, 0.0, 0.0);   // move forward at 0.2 m/s
+            sleepFor(2.0);                // drive for 2 seconds (adjust if needed)
+            robot.stop();
+
+            // Turn 90 degrees
+            robot.drive(0.0, 0.0, 0.5);   // rotate at 0.5 rad/s
+            sleepFor(3.14 / 2 / 0.5);     // turn 90 degrees = pi/2 radians
+            robot.stop();
+        }
+    }
 
     // Stop the robot.
     std::cout << "Stopping the robot!!" << std::endl;
